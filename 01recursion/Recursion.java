@@ -18,6 +18,15 @@ public class Recursion{
 	System.out.println(r.fib(11));
 	*/
 	
+	/*SQRT TESTS
+	System.out.println(r.sqrt(0));
+	System.out.println(r.sqrt(1));
+	System.out.println(r.sqrt(25));
+	System.out.println(r.sqrt(100));
+	System.out.println(r.sqrt(4000));
+	System.out.println(r.sqrt(.04));
+	System.out.println(r.sqrt(.00000001));
+	*/
 	
     }
 
@@ -43,6 +52,23 @@ public class Recursion{
 	    return n;
 	}
 	return fib(n-1) + fib(n-2);
+    }
+
+    public double sqrt(double n){
+	if (n < 0){
+	    throw new IllegalArgumentException();
+	}
+	if (n == 0){
+	    return 0.0;
+	}
+	return sqrtHelp(n,1);
+    }
+
+    public double sqrtHelp(double num, double guess){
+	if(Math.abs((num - guess*guess)/num) < 0.00001){
+	    return guess;
+	}
+	return sqrtHelp(num,((num/guess + guess)/2));
     }
 
 }

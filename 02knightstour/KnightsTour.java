@@ -62,11 +62,10 @@ public class KnightsTour{
     }
 		
     public boolean solve(int x,int y,int currentMoveNumber){
-	/*
+	
 	System.out.println(this);
 	wait(20);
 	System.out.println(""+x+" "+y);
-	*/
 
 	if ( x < 0 || x >= board.length ||
 	     y < 0 || y >= board.length ){
@@ -75,11 +74,13 @@ public class KnightsTour{
 	if (board[x][y] != 0){
 	    return false; //spot already taken
 	}
+	board[x][y] = currentMoveNumber;
+
 	if (currentMoveNumber == (board.length * board.length)){
 	    return true; //board is filled
 	}
 
-	board[x][y] = currentMoveNumber;
+	//board[x][y] = currentMoveNumber;
 
 	//test 8 possibilities
 	if ( solve( x-2, y-1, currentMoveNumber + 1 ) ||
@@ -97,8 +98,12 @@ public class KnightsTour{
 	return false;
     }
 
-
+    
     public static void main(String[]args){
+	KnightsTour k = new KnightsTour(Integer.parseInt(args[0]));
+	k.solve();
+	System.out.println(k);
+	/*
 	KnightsTour k = new KnightsTour(1);
 	KnightsTour l = new KnightsTour(2);
 	KnightsTour m = new KnightsTour(3);
@@ -124,16 +129,7 @@ public class KnightsTour{
 
 	System.out.println(p.solve());
 	System.out.println(p);
-	//System.out.println(q.solve());
-	//System.out.println(r.solve());
-	/*
-	boolean b = k.solve();
-	if (b == false){
-	    System.out.println("No solution");
-	}else{
-	    System.out.println(k);
-	}
-	*/
+    */
     }
 
 }

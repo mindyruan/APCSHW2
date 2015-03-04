@@ -70,11 +70,15 @@ public class Sorts{
     }
 
     public static void main(String[]args){
-	int[] a = {19,11,900,2,-1};
+	int[] a = new int[100];
+	Random r = new Random();
+	for (int i = 0; i < a.length; i++){
+	    a[i] = r.nextInt(100000);
+	}
 	int[] b = {9000000, 129783, 213,1,-1341,-1321,-9000,10939,12};
-	mergesort(b);
-	for (int i = 0; i < b.length; i++){
-	    System.out.print(b[i] + " ");
+	mergesort(a);
+	for (int i = 0; i < a.length; i++){
+	    System.out.print(a[i] + " ");
 	}
     }
 

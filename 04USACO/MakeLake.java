@@ -14,10 +14,10 @@ public class MakeLake{
     }
 
     public void stomp(int x, int y, int stomps){
-	int high = 0;
+	int high = 0; //highest cow
 	x--;
 	y--;
-	//find biggest value
+	//find highest value
 	for (int i = x; i < x+3; i++){
 	    for (int j = y; j < y+3; j++){
 		if (pasture[i][j] > high){
@@ -25,7 +25,7 @@ public class MakeLake{
 		}
 	    }
 	}
-
+	//stomp surrounding area
 	for (int i = x; i < x+3; i++){
 	    for (int j = y; j < y+3; j++){
 		int done = high - pasture[i][j];
@@ -38,11 +38,19 @@ public class MakeLake{
     }
 
     public int depth(int elev){
-	return 0;
+	int d = 0;
+	for (int i = 0; i < pasX; i++){
+	    for (int j = 0; j < pasY; j++){
+		if (elev - pasture[i][j] > 0){
+		    d += elev - pasture[i][j];
+		}
+	    }
+	}
+	return d;
     }
 
     public int volume(){
-	return 72*72*depth(22);
+	return 72*72*depth(22); //are we even allowed to just put in 22
     }
 
     public String toString(){
@@ -64,6 +72,5 @@ public class MakeLake{
 	System.out.println("depth= " + m.depth(22));
 	System.out.println("volume= " + m.volume());
     }
-
 
 }

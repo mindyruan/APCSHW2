@@ -17,7 +17,7 @@ public class MyLinkedList{
 	    current = current.getNext();
 	}
 	//ans += "]";
-	return (ans.substring(0,ans.length()-1) + " ]") ;
+	return (ans.substring(0,ans.length()-2) + " ]") ;
     }
 
     public boolean add(int val){
@@ -122,9 +122,6 @@ public class MyLinkedList{
 
     public static void main(String[]arg){
 	MyLinkedList l = new MyLinkedList();
-
-	//empty list
-	System.out.println(l);
 
 	l.add(3);
 	System.out.println(l);

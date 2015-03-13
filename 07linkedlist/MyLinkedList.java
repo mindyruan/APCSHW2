@@ -27,7 +27,7 @@ public class MyLinkedList{
 	    current = head;
 	}else{
 	    current = head;
-	    for (int i = 0; i < size; i++){
+	    for (int i = 0; i < size-1; i++){
 		current = current.getNext();
 	    }
 	    current.setNext(temp);
@@ -113,12 +113,22 @@ public class MyLinkedList{
 	System.out.println(l);
 
 	l.add(4);
-	//l.add(7);
-	//l.add(8);
-	//l.add(1);
-	//l.add(0);
+	l.add(7);
+	l.add(89);
+	l.add(-1);
+	l.add(0);
 	System.out.println(l);
 
+	System.out.println("index 0: " + l.get(0));
+	System.out.println("index 1: " + l.get(1));
+	System.out.println("index 3: " + l.get(3));
+
+	l.set(4,666);
+	System.out.println(l);
+	System.out.println("found 666: " + l.indexOf(666));
+
+	System.out.println("destroyed index 5: " + l.remove(5));
+	System.out.println(l);
 
     }
 

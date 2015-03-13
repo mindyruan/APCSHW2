@@ -36,6 +36,23 @@ public class MyLinkedList{
 	return true; //always returns true unless index sucks
     }
 
+    public boolean add(int index, int val){
+	if (index < 0 || index >= size){
+	    //index sucks
+	    throw new IndexOutOfBoundsException();
+	}
+	LNode temp = new LNode(val);
+	current = head;
+	for (int i = 0; i < index-1; i++){
+	    current = current.getNext();
+	}
+	LNode temp2 = current.getNext();
+	current.setNext(temp);
+	temp.setNext(temp2);
+	size++;
+	return true;
+    }
+
     public void set(int index, int val){
 	if (index < 0 || index >= size){
 	    //index sucks
@@ -128,6 +145,9 @@ public class MyLinkedList{
 	System.out.println("found 666: " + l.indexOf(666));
 
 	System.out.println("destroyed index 5: " + l.remove(5));
+	System.out.println(l);
+
+	System.out.println("added 6 at index 2: " + l.add(2,6));
 	System.out.println(l);
 
     }

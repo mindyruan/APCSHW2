@@ -42,6 +42,10 @@ public class MyLinkedList<T> implements Iterable<T>{
 	size = 0;
     }
 
+    public Iterator<T> iterator(){
+	return new MLLIterator<T>(head);
+    }
+
     public String toString(){
 	String ans = "[ ";
         current = head;
@@ -206,8 +210,8 @@ public class MyLinkedList<T> implements Iterable<T>{
 
 
     public static void main(String[]arg){
-	/*
-	MyLinkedList<int> l = new MyLinkedList<int>();
+	
+	MyLinkedList<Integer> l = new MyLinkedList<Integer>();
 
 	l.add(3);
 	System.out.println(l);
@@ -232,7 +236,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 
 	System.out.println("added 6 at index 2: " + l.add(2,6));
 	System.out.println(l);
-	*/
+	
 
     }
 

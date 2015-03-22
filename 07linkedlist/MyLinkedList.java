@@ -1,11 +1,44 @@
-public class MyLinkedList{
+import java.util.*;
 
-    private LNode head;
-    private LNode current;
+public class MyLinkedList<T> implements Iterable<T>{
+
+    private LNode<T> head,tail,current;
     private int size;
 
+    // ITERATOR CLASS
+    private class MLLIterator<T> implements Iterator<T>{
+
+	private LNode<T> current;
+
+	public MLLIterator(LNode<T> head){
+	    current = head;
+	}
+
+	public boolean hasNext(){
+	    return (current != null);
+	}
+
+	public void remove(){ //lol
+	    throw new UnsupportedOperationException();
+	}
+
+	public T next(){
+	    if (hasNext()){
+		T ans = current.getValue();
+		current = current.getNext();
+		return ans;
+	    }else{
+		throw new NoSuchElementException();
+	    }
+	}
+
+    } // end of iterator class
+
+    //constructor
     public MyLinkedList(){
-	head = new LNode(0);
+	head = new LNode<T>();
+        tail = new LNode<T>();
+	current = new LNode<T>();
 	size = 0;
     }
 
@@ -20,28 +53,50 @@ public class MyLinkedList{
 	return (ans.substring(0,ans.length()-2) + " ]") ;
     }
 
-    public boolean add(int val){
-	LNode temp = new LNode(val);
+    public boolean add(T val){
+	LNode<T> temp = new LNode<T>(val);
 	if (size == 0){
 	    head = temp;
+	    tail = head;
 	    current = head;
 	}else{
+	    tail.setNext(temp);
+	    tail = temp;
+	    /*
 	    current = head;
 	    for (int i = 0; i < size-1; i++){
 		current = current.getNext();
 	    }
 	    current.setNext(temp);
+	    */
 	}
 	size++;
 	return true; //always returns true unless index sucks
     }
 
-    public boolean add(int index, int val){
+    public boolean add(int index, T val){
 	if (index < 0 || index >= size){
 	    //index sucks
 	    throw new IndexOutOfBoundsException();
 	}
-	LNode temp = new LNode(val);
+	LNode<T> temp = new LNode<T>(val);
+
+	if (index == 0){
+	    temp.setNext(head);
+	    head = temp;
+	}else if (index == size()){
+	    add(val);
+	}else{
+	    current = head;
+	    for (int i = 0; i < index-1; i++){
+		current = current.getNext();
+	    }
+	    LNode<T> temp2 = current.getNext();
+	    current.setNext(temp);
+	    temp.setNext(temp2);
+	}
+
+	/*
 	current = head;
 	for (int i = 0; i < index-1; i++){
 	    current = current.getNext();
@@ -49,11 +104,12 @@ public class MyLinkedList{
 	LNode temp2 = current.getNext();
 	current.setNext(temp);
 	temp.setNext(temp2);
+	*/
 	size++;
 	return true;
     }
 
-    public void set(int index, int val){
+    public void set(int index, T val){
 	if (index < 0 || index >= size){
 	    //index sucks
 	    throw new IndexOutOfBoundsException();
@@ -66,7 +122,7 @@ public class MyLinkedList{
 	current.setValue(val);
     }
 
-    public int get(int index){
+    public T get(int index){
 	if (index < 0 || index >= size){
 	    //index sucks
 	    throw new IndexOutOfBoundsException();
@@ -79,10 +135,10 @@ public class MyLinkedList{
 	return current.getValue();
     }
 
-    public int indexOf(int val){
+    public int indexOf(T val){
 	current = head;
 	for (int i = 0; i < size; i++){
-	    if (current.getValue() == val){
+	    if (current.getValue().equals(val)){
 		return i;
 	    }else{
 		current = current.getNext();
@@ -92,11 +148,35 @@ public class MyLinkedList{
 	return -1;
     }
 
-    public int remove(int index){
+    public T remove(int index){
 	if (index < 0 || index >= size){
 	    //index sucks
 	    throw new IndexOutOfBoundsException();
 	}
+
+	LNode<T> dead;
+	if (index == 0){
+	    dead = head;
+	    head = dead.getNext();
+	}else if (index == size()-1){
+	    current = head;
+	    for (int i = 0; i < size()-2; i++){
+		current = current.getNext();
+	    }
+	    dead = tail;
+	    tail = current;
+	}else{
+	    current = head;
+	    for (int i = 0; i < index-1; i++){
+		current = current.getNext();
+	    }
+	    dead = current.getNext();
+	    current.setNext(dead.getNext()); //skip over dead
+	}
+	size--;
+	return dead.getValue();
+
+	/*
 	current = head;
 	for (int i = 0; i < index-1; i++){
 	    current = current.getNext();
@@ -109,6 +189,7 @@ public class MyLinkedList{
 	current.setNext(dead.getNext());
 	size--;
 	return dead.getValue();
+	*/
     }
 
     public int size(){
@@ -119,9 +200,14 @@ public class MyLinkedList{
 	size = 0;
     }
 
+    public String name(){
+	return "ruan.mindy";
+    }
+
 
     public static void main(String[]arg){
-	MyLinkedList l = new MyLinkedList();
+	/*
+	MyLinkedList<int> l = new MyLinkedList<int>();
 
 	l.add(3);
 	System.out.println(l);
@@ -146,6 +232,7 @@ public class MyLinkedList{
 
 	System.out.println("added 6 at index 2: " + l.add(2,6));
 	System.out.println(l);
+	*/
 
     }
 

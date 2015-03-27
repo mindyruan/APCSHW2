@@ -25,7 +25,13 @@ public class MyDeque<T>{
     }
 
     public void addLast(T val){
-
+	tail++;
+	if (tail == deque.length){
+	    //wrap to the beginning
+	    tail = 0;
+	}
+	deque[tail] = val;
+	size++;
     }
 
     public void removeFirst(){ //T
@@ -57,6 +63,9 @@ public class MyDeque<T>{
 
 	d.addFirst("bruh");
 	d.addFirst("bro");
+	print(d);
+	d.addLast("fishsticks");
+	d.addLast("goldfish");
 	print(d);
     }
 

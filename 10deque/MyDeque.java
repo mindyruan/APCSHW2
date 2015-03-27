@@ -34,8 +34,13 @@ public class MyDeque<T>{
 	size++;
     }
 
-    public void removeFirst(){ //T
-
+    public T removeFirst(){ //T
+	T ans = (T)deque[head];
+	head++;
+	if (head == deque.length){
+	    head = 0;
+	}
+	return ans;
     }
 
     public void removeLast(){ //T
@@ -66,6 +71,10 @@ public class MyDeque<T>{
 	print(d);
 	d.addLast("fishsticks");
 	d.addLast("goldfish");
+	d.addLast("space mermaids");
+	d.addLast("souls");
+	d.addLast("oprah");
+	d.addLast("please wrap");
 	print(d);
     }
 

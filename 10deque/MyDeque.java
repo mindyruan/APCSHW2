@@ -36,15 +36,26 @@ public class MyDeque<T>{
 
     public T removeFirst(){ //T
 	T ans = (T)deque[head];
+	deque[head] = null;
 	head++;
+	size--;
 	if (head == deque.length){
+	    //wrap to the beginning
 	    head = 0;
 	}
 	return ans;
     }
 
-    public void removeLast(){ //T
-
+    public T removeLast(){ //T
+	T ans = (T)deque[tail];
+	deque[tail] = null;
+	tail--;
+	size--;
+	if(tail == -1){
+	    //wrap to the end
+	    tail = deque.length - 1;
+	}	size--;
+	return ans;
     }
 
     public void getFirst(){ //T
@@ -75,6 +86,10 @@ public class MyDeque<T>{
 	d.addLast("souls");
 	d.addLast("oprah");
 	d.addLast("please wrap");
+	d.removeFirst();
+	print(d);
+	d.removeLast();
+	d.removeLast();
 	print(d);
     }
 

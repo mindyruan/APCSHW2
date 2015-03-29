@@ -4,6 +4,8 @@ public class MyDeque<T>{
 
     private Object[]deque;
     private int head,tail,size;
+    private boolean debug = false;
+    //private boolean debug = true;
 
     public MyDeque(){
 	deque = new Object[10];
@@ -95,7 +97,7 @@ public class MyDeque<T>{
 	Object[] ans = new Object[deque.length*2];
 	//System.out.println("head: "+head+"  tail: "+tail);
 	int newTail = 0;
-	if (head < tail){
+	if (head <= tail){
 	    //copy over
 	    for (int i = 0; i <= tail; i++){
 		ans[i] = deque[i];
@@ -118,8 +120,23 @@ public class MyDeque<T>{
     
     public String toString(){
 	String ans = "[ ";
-	for (int i = 0; i < deque.length; i++){
-	    ans += deque[i] + ", ";
+	if (debug){
+	    for (int i = 0; i < deque.length; i++){
+		ans += deque[i] + ", ";
+	    }
+	}else{
+	    if (head <= tail){
+		for (int i = head; i <= tail; i++){
+		    ans += deque[i] + ", ";
+		}
+	    }else{
+		for (int i = head; i < deque.length; i++){
+		    ans += deque[i] + ", ";
+		}
+		for (int i = 0; i <= tail; i++){
+		    ans += deque[i] + ", ";
+		}
+	    }
 	}
 	return ans.substring(0,ans.length()-2) + " ]";
     }

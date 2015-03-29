@@ -77,12 +77,12 @@ public class MyDeque<T>{
 	return ans;
     }
 
-    public void getFirst(){ //T
-
+    public T getFirst(){ //T
+	return (T)deque[head];
     }
 
-    public void getLast(){ //T
-
+    public T getLast(){ //T
+	return (T)deque[tail];
     }
     
     public void resize(){
@@ -138,8 +138,10 @@ public class MyDeque<T>{
 	d.addFirst("shaquille o'neal");
 	d.addFirst("shakira shakira");
 	print(d);
-	d.addLast("dale");
+	d.addLast("pitbull: dale");
 	print(d);
+	print(d.getFirst());
+	print(d.getLast());
     }
 
     public static void print(Object o){

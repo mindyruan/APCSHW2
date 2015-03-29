@@ -33,7 +33,7 @@ public class MyDeque<T>{
 	//resize if full
 	if (size == deque.length){
 	    resize();
-	    System.out.println("head: "+head+"  tail: "+tail);
+	    //System.out.println("head: "+head+"  tail: "+tail);
 	}
 
 	tail++;
@@ -78,16 +78,22 @@ public class MyDeque<T>{
     }
 
     public T getFirst(){ //T
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
 	return (T)deque[head];
     }
 
     public T getLast(){ //T
+	if (size == 0){
+	    throw new NoSuchElementException();
+	}
 	return (T)deque[tail];
     }
     
     public void resize(){
 	Object[] ans = new Object[deque.length*2];
-	System.out.println("head: "+head+"  tail: "+tail);
+	//System.out.println("head: "+head+"  tail: "+tail);
 	int newTail = 0;
 	if (head < tail){
 	    //copy over
@@ -107,7 +113,7 @@ public class MyDeque<T>{
 	//replace
 	deque = ans;
 	tail = newTail;
-	System.out.println(deque.length);
+	//System.out.println(deque.length);
     }
     
     public String toString(){

@@ -47,6 +47,7 @@ public class Maze{
 	    if(c == 'S'){
 		startx = i % maxx;
 		starty = i / maxx;
+		//System.out.println("start: ("+startx+","+starty+")");
 	    }
 	}
     }
@@ -123,22 +124,59 @@ public class Maze{
 	return false;//by default the maze didn't get solved
     }
 
-    public boolean solveBFS(){ //the original solve
+    public boolean solveBFS(){
 	if(startx < 0){
 	    System.out.println("No starting point 'S' found in maze.");
 	    return false;
 	}else{
-	    maze[startx][starty] = ' ';
+	    //maze[startx][starty] = ' ';
+	    System.out.println("start: "+startx+","+starty);
 	    return solveBFS(startx,starty);
 	}
     }
 
+    /*
     public boolean solveBFS(int x,int y){
+	System.out.println(this);
+	wait(20);
+
+	char now = maze[x][y];
+	System.out.println(now);
+	if (now == 'E'){
+	    return true;
+	}else if (now == 'x' || now == '#'){
+	    return false; //invalid move
+	}
+	maze[x][y] = 'x'; //been here
+	if (y < maxy-1){
+	    frontier.addFirst(new Coordinate(x,y+1));
+	}
+	if (x > 0){
+	    frontier.addFirst(new Coordinate(x-1,y));
+	}
+	if (x < maxx-1){
+	    frontier.addFirst(new Coordinate(x+1,y));
+	}
+	if (y > 0){
+	    frontier.addFirst(new Coordinate(x,y-1));
+	}
+	Coordinate c = frontier.removeLast();
+	return solveBFS(c.getX(),c.getY());
+    }
+    */
+
+    
+    public boolean solveBFS(int x,int y){
+	System.out.println(this);
+	wait(20);
+
 	frontier.addLast(new Coordinate(x,y,null));
 	Coordinate now = frontier.getFirst();
 	//System.out.println(now);
 
 	while (maze[now.getX()][now.getY()]!='E'){
+	System.out.println(this);
+	wait(50);
 	    now = frontier.removeFirst();
 	    //System.out.println(now);
 	
@@ -166,5 +204,5 @@ public class Maze{
 	}
 	return false;
     }
-
+    
 }

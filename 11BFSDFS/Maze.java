@@ -10,6 +10,9 @@ public class Maze{
     private String hide =  "\033[?25l";
     private String show =  "\033[?25h";
 
+    private MyDeque<Coordinate> frontier = new MyDeque<Coordinate>();
+    //private ArrayList<Coordinate> track;
+
     public Maze(String filename){
 	startx = -1;
 	starty = -1;
@@ -131,7 +134,36 @@ public class Maze{
     }
 
     public boolean solveBFS(int x,int y){
-	//soon
+	frontier.addLast(new Coordinate(x,y,null));
+	Coordinate now = frontier.getFirst();
+	//System.out.println(now);
+
+	while (maze[now.getX()][now.getY()]!='E'){
+	    now = frontier.removeFirst();
+	    //System.out.println(now);
+	
+	    //System.out.println(now);
+	    if (maze[now.getX()][now.getY()]!='E'){
+		int n = now.getX();
+		int m = now.getY();
+		maze[n][m] = '*';
+		if (maze[n+1][m] == ' ' || maze[n+1][m] == 'E'){
+		    frontier.addLast(new Coordinate(n+1,m,now));
+		}
+		if (maze[n-1][m] == ' ' || maze[n-1][m] == 'E'){
+		    frontier.addLast(new Coordinate(n-1,m,now));
+		}
+		if (maze[n][m+1] == ' ' || maze[n][m+1] == 'E'){
+		    frontier.addLast(new Coordinate(n,m+1,now));
+		}
+		if (maze[n][m-1] == ' ' || maze[n][m-1] == 'E'){
+		    frontier.addLast(new Coordinate(n,m-1,now));
+		}
+	    }
+	}
+	if (maze[now.getX()][now.getY()] == 'E'){
+	    return true;
+	}
 	return false;
     }
 

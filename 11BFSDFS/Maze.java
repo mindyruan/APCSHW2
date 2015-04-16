@@ -100,13 +100,15 @@ public class Maze{
 	    return false;
 	}else{
 	    maze[startx][starty] = ' ';
-	    return solveDFS(startx,starty);
+	    return solveDFS(true,startx,starty);
 	}
     }
 
-    public boolean solveDFS(int x,int y){
-	System.out.println(this);
-	wait(20);
+    public boolean solveDFS(boolean animate,int x,int y){
+	if(animate){
+	    System.out.println(this);
+	    wait(20);
+	}
 	if(maze[x][y] == 'E'){
 	    return true;
 	}
@@ -114,8 +116,8 @@ public class Maze{
 	    //mark the floor with @
 	    maze[x][y] = '@';
 	    //recursion ho!!
-	    if( solveDFS(x + 1, y) || solveDFS( x, y + 1) ||
-		solveDFS(x - 1, y) || solveDFS(x, y - 1)){
+	    if( solveDFS(animate,x + 1, y) || solveDFS(animate,x, y + 1) ||
+		solveDFS(animate,x - 1, y) || solveDFS(animate,x, y - 1)){
 		return true;
 	    }
 	    //replace the @ with a .
@@ -131,7 +133,7 @@ public class Maze{
 	}else{
 	    //maze[startx][starty] = ' ';
 	    System.out.println("start: "+startx+","+starty);
-	    return solveBFS(startx,starty);
+	    return solveBFS(true,startx,starty);
 	}
     }
 
@@ -166,9 +168,12 @@ public class Maze{
     */
 
     
-    public boolean solveBFS(int x,int y){
-	System.out.println(this);
-	wait(20);
+    public boolean solveBFS(boolean animate,int x,int y){
+	//initial maze
+	if (animate){
+	    System.out.println(this);
+	    wait(20);
+	}
 
 	frontier.addLast(new Coordinate(x,y,null));
 	Coordinate now = frontier.getFirst();
@@ -179,12 +184,11 @@ public class Maze{
 	wait(50);
 	    now = frontier.removeFirst();
 	    //System.out.println(now);
-	
 	    //System.out.println(now);
 	    if (maze[now.getX()][now.getY()]!='E'){
 		int n = now.getX();
 		int m = now.getY();
-		maze[n][m] = '*';
+		maze[n][m] = '@';
 		if (maze[n+1][m] == ' ' || maze[n+1][m] == 'E'){
 		    frontier.addLast(new Coordinate(n+1,m,now));
 		}
@@ -204,5 +208,5 @@ public class Maze{
 	}
 	return false;
     }
-    
+
 }

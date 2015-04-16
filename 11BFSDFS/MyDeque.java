@@ -5,8 +5,8 @@ public class MyDeque<T>{
     private Object[]deque;
     private int[]priority;
     private int head,tail,size;
-    //private boolean debug = false;
-    private boolean debug = true;
+    private boolean debug = false;
+    //private boolean debug = true;
 
     public MyDeque(){
 	deque = new Object[10];
@@ -96,6 +96,55 @@ public class MyDeque<T>{
 	    tail = deque.length - 1;
 	}       
 	return ans;
+    }
+
+    public T removeSmallest(){
+	int min = priority[head];
+	int index = head;
+	if (head <= tail){
+	    for (int i = head; i < tail; i++){
+		if (min > priority[i]){
+		    min = priority[i];
+		    index = i;
+		}
+	    }
+	}else{
+	    for (int i = head; i < deque.length; i++){
+		if (min > priority[i]){
+		    min = priority[i];
+		    index = i;
+		}
+	    }
+	    for (int i = 0; i <= tail; i++){
+		if (min > priority[i]){
+		    min = priority[i];
+		    index = i;
+		}
+	    }
+	}
+	//System.out.println(index+" "+deque[index]+" "+priority[index]);
+	T rem = (T)deque[index];
+	//System.out.println(rem);
+	if (index < tail){
+	    for (int i = index; i < tail; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	}else{
+	    for (int i = index; i < deque.length-1; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	    deque[deque.length-1] = deque[0];
+	    priority[priority.length-1] = priority[0];
+	    for (int i = 0; i <= tail; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	}
+	tail--;
+	//head++;
+	return rem;
     }
 
     public T getFirst(){ //T
@@ -189,6 +238,13 @@ public class MyDeque<T>{
 	d.add("oprah",5);
 	d.add("turn up for dogs",10);
 	d.add("space mermaids",8);
+	d.add("my life",1);
+	d.add("shaq",3);
+	d.add("shakira shakira",6);
+	print(d);
+	print(d.toStringP());
+
+	d.removeSmallest();
 	print(d);
 	print(d.toStringP());
 

@@ -147,6 +147,55 @@ public class MyDeque<T>{
 	return rem;
     }
 
+    public T removeLargest(){
+	int max = priority[head];
+	int index = head;
+	if (head <= tail){
+	    for (int i = head; i < tail; i++){
+		if (max < priority[i]){
+		    max = priority[i];
+		    index = i;
+		}
+	    }
+	}else{
+	    for (int i = head; i < deque.length; i++){
+		if (max < priority[i]){
+		    max = priority[i];
+		    index = i;
+		}
+	    }
+	    for (int i = 0; i <= tail; i++){
+		if (max < priority[i]){
+		    max = priority[i];
+		    index = i;
+		}
+	    }
+	}
+	System.out.println(index+" "+deque[index]+" "+priority[index]);
+	T rem = (T)deque[index];
+	//System.out.println(rem);
+	if (index < tail){
+	    for (int i = index; i < tail; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	}else{
+	    for (int i = index; i < deque.length-1; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	    deque[deque.length-1] = deque[0];
+	    priority[priority.length-1] = priority[0];
+	    for (int i = 0; i <= tail; i++){
+		deque[i] = deque[i+1];
+		priority[i] = priority[i+1];
+	    }
+	}
+	tail--;
+	//head++;
+	return rem;
+    }
+
     public T getFirst(){ //T
 	if (size == 0){
 	    throw new NoSuchElementException();
@@ -245,6 +294,10 @@ public class MyDeque<T>{
 	print(d.toStringP());
 
 	d.removeSmallest();
+	print(d);
+	print(d.toStringP());
+
+	d.removeLargest();
 	print(d);
 	print(d.toStringP());
 

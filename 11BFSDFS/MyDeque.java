@@ -3,14 +3,16 @@ import java.util.*;
 public class MyDeque<T>{
 
     private Object[]deque;
+    private int[]priority;
     private int head,tail,size;
-    private boolean debug = false;
-    //private boolean debug = true;
+    //private boolean debug = false;
+    private boolean debug = true;
 
     public MyDeque(){
-	deque = new Object[100];
-	head = 50;
-	tail = 49;
+	deque = new Object[10];
+	priority = new int[10];
+	head = 5;
+	tail = 4;
 	size = 0;
     }
 
@@ -44,6 +46,23 @@ public class MyDeque<T>{
 	    tail = 0;
 	}
 	deque[tail] = val;
+	size++;
+    }
+
+    public void add(T val, int p){
+	//resize if full
+	if (size == deque.length){
+	    resize();
+	    //System.out.println("head: "+head+"  tail: "+tail);
+	}
+
+	tail++;
+	if (tail == deque.length){
+	    //wrap to the beginning
+	    tail = 0;
+	}
+	deque[tail] = val;
+	priority[tail] = p;
 	size++;
     }
 
@@ -141,9 +160,39 @@ public class MyDeque<T>{
 	return ans.substring(0,ans.length()-2) + " ]";
     }
 
+    public String toStringP(){
+	String ans = "[ ";
+	if (debug){
+	    for (int i = 0; i < deque.length; i++){
+		ans += priority[i] + ", ";
+	    }
+	}else{
+	    if (head <= tail){
+		for (int i = head; i <= tail; i++){
+		    ans += priority[i] + ", ";
+		}
+	    }else{
+		for (int i = head; i < deque.length; i++){
+		    ans += priority[i] + ", ";
+		}
+		for (int i = 0; i <= tail; i++){
+		    ans += priority[i] + ", ";
+		}
+	    }
+	}
+	return ans.substring(0,ans.length()-2) + " ]";
+    }
+
     public static void main(String[]args){
 	MyDeque<String> d = new MyDeque<String>();
 
+	d.add("oprah",5);
+	d.add("turn up for dogs",10);
+	d.add("space mermaids",8);
+	print(d);
+	print(d.toStringP());
+
+	/*
 	d.addFirst("bruh");
 	d.addFirst("bro");
 	//print(d);
@@ -165,6 +214,7 @@ public class MyDeque<T>{
 	print(d);
 	print(d.getFirst());
 	print(d.getLast());
+	*/
     }
 
     public static void print(Object o){

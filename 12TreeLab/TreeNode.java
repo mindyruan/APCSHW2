@@ -11,8 +11,8 @@ public class TreeNode<E>{
 	//constructor
     }
 
-    public TreeNode<T>(){
-
+    public TreeNode(E val){
+	data = val;
     }
 
     public E getData(){

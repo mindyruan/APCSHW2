@@ -3,29 +3,35 @@ import java.util.*;
 public class MyHeap{
     private int[] heap = new int[6];
     private boolean max;
-    private int size;
 
     public MyHeap(){
 	max = true;
-	size = 0;
     }
 
     public MyHeap(boolean isMax){
-	size = 0;
-	if (isMax){
-	    max = true;
-	}else{
-	    max = false;
-	}
+	max = isMax;
+    }
+
+    //get the left child of this index
+    public int getLeft(int index){
+	return index*2;
+    }
+
+    //get the right child of this index
+    public int getRight(int index){
+	return index*2 + 1;
     }
 
     public String toString(){
+	return Arrays.toString(heap);
+	/*
 	String ans = "[ ";
 	for (int i = 0; i < heap.length; i++){
 	    ans += heap[i] + " ";
 	}
 	ans += "]";
 	return ans;
+	*/
     }
 
     public int remove(){
@@ -37,12 +43,19 @@ public class MyHeap{
 
     public void add(int x){
 	//resize if needed
-        if (size == 0){ //add at root
+
+	//heap[0] = number of elements in heap
+	//next open spot in array = x
+	heap[heap[0] + 1] = x;
+	heap[0]++;
+
+	/*
+	if (size == 0){ //add at root
 	    heap[1] = x;
 	    size++;
 	}else{
-
 	}
+	*/
     }
 
     public int peek(){
@@ -50,12 +63,14 @@ public class MyHeap{
 	return heap[1];
     }
 
-    public int size(){
-	return size;
-    }
-
     public static void main(String[]arg){
 	MyHeap h = new MyHeap();
+	print(h);
+
+	h.add(88);
+	print(h);
+
+	h.add(2);
 	print(h);
     }
 

@@ -34,35 +34,24 @@ public class MyHeap{
 	    return -1;
 	}else{
 	    int temp = heap[1];
-<<<<<<< HEAD
 
 	    //replace root with last added
 	    heap[1] = heap[heap[0]];
 	    heap[heap[0]] = 0;
-=======
-	    
-	    //replace root with last added
-	    heap[1] = heap[heap[0]];
-	    //heap[heap[0]] = 0;
-	    //heap[0]--;
 	    System.out.println(heap[0]);
->>>>>>> 1d8714d80b78506e1ffe9e126a414a0128ef6856
 
 	    //swap down
 	    int curr = 1;
 	    //System.out.println(hasChildren(curr));
-<<<<<<< HEAD
+
 	    //System.out.println(this);
 
 	    //while there are children
 	    while (hasChildren(curr) && curr < heap[0]){
 		//if child > new root
 		if (heap[getLeft(curr)] > heap[curr]){
-		    //System.out.println(""+curr+" "+heap[getLeft(curr)]);
-
 		    swap(getLeft(curr),curr);
 		    curr = getLeft(curr);
-		    //System.out.println("after "+curr);
 		}else if (heap[getRight(curr)] > heap[curr]){
 		    swap(getRight(curr),curr);
 		    curr = getRight(curr);
@@ -71,34 +60,7 @@ public class MyHeap{
 		}
 		System.out.println(this);
 	    }
-	    heap[0]--;
-	    return temp;
-	}
-    }
 
-    public boolean hasChildren(int i){
-	return (getLeft(i) <= heap[0] || getRight(i) <= heap[0]);
-=======
-	    
-	    System.out.println(this + "go!!");
-
-	    if (heap[0] > 1){
-		//while there are children
-		while (hasChildren(curr)){
-		    //if child > new root
-		    if (heap[getLeft(curr)] > heap[curr]){
-			swap(getLeft(curr),curr);
-			curr = getLeft(curr);
-		    }else if (heap[getRight(curr)] > heap[curr]){
-			swap(getRight(curr),curr);
-			curr = getRight(curr);
-		    }else{
-			break;
-		    }
-		    System.out.println(this);
-		}
-	    }
-	    
 	    heap[0]--;
 	    return temp;
 	}
@@ -112,25 +74,11 @@ public class MyHeap{
 	int temp = heap[i];
 	heap[i] = heap[j];
 	heap[j] = temp;
->>>>>>> 1d8714d80b78506e1ffe9e126a414a0128ef6856
     }
 
-    public void swap(int i, int j){
-	int temp = heap[i];
-	heap[i] = heap[j];
-	heap[j] = temp;
-    }
-
-    public void add(int val){
+    public void add(int x){
 	//resize if needed
 
-<<<<<<< HEAD
-	heap[heap[0] + 1] = val;
-	heap[0]++;
-	int size = heap[0];
-	//compare and swap
-	while (heap[0]/2 > 0){
-=======
 	//heap[0] = number of elements in heap
 	//next open spot in array = x
 	heap[heap[0] + 1] = x;
@@ -140,23 +88,16 @@ public class MyHeap{
 	//compare and swap
 	while (heap[0]/2 > 0){
 
->>>>>>> 1d8714d80b78506e1ffe9e126a414a0128ef6856
 	    //if child > parent
 	    if (heap[heap[0]] > heap[heap[0]/2]){
 		swap(heap[0], heap[0]/2);
 	    }
 	    //System.out.println(heap[0]);
-<<<<<<< HEAD
-	    heap[0] = heap[0]/2;
-	}
-	heap[0] = size;
-=======
-	    
+
 	    heap[0] = heap[0]/2;
 	}
 	heap[0] = size;
 
->>>>>>> 1d8714d80b78506e1ffe9e126a414a0128ef6856
     }
 
     public int peek(){
@@ -174,11 +115,8 @@ public class MyHeap{
 	h.add(900);
 	h.add(4);
 	h.add(0);
-<<<<<<< HEAD
 	h.add(230);
-=======
 	h.add(-2);
->>>>>>> 1d8714d80b78506e1ffe9e126a414a0128ef6856
 	print(h);
 
 	print("remove root!! (please)");

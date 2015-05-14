@@ -27,11 +27,40 @@ public class MyHeap{
 	return Arrays.toString(heap);
     }
 
+    //remove root
     public int remove(){
-	// remove root
-	int temp = heap[1];
+	if (heap[0] == 0){
+	    System.out.println("stop that");
+	    return -1;
+	}else{
+	    int temp = heap[1];
+	    
+	    //replace root with last added
+	    heap[1] = heap[heap[0]];
+	    heap[heap[0]] = 0;
+	    //heap[0]--;
+	    System.out.println(heap[0]);
 
-	return -1;
+	    //swap down
+	    //if child > new root
+	    int curr = 1;
+	    System.out.println(hasChildren(curr));
+
+	    /*
+	    if (heap[0] > 1){
+		//while there are children
+		while (hasChildren(curr)){
+		    swap(getLeft(1),heap[1]);
+		}
+	    }
+	    */
+	    heap[0]--;
+	    return temp;
+	}
+    }
+
+    public boolean hasChildren(int i){
+	return (getLeft(i) <= heap[0] || getRight(i) <= heap[0]);
     }
 
     public void swap(int i, int j){
@@ -83,6 +112,9 @@ public class MyHeap{
 	h.add(4);
 	h.add(0);
 	h.add(-2);
+	print(h);
+
+	h.remove();
 	print(h);
 
     }

@@ -1,7 +1,8 @@
-import java.util.*;
+What's your D&D Alignment?import java.util.*;
 
 public class MyHeap{
-    private int[] heap = new int[6];
+
+    private int[] heap = new int[10];
     private boolean max;
 
     public MyHeap(){
@@ -24,14 +25,6 @@ public class MyHeap{
 
     public String toString(){
 	return Arrays.toString(heap);
-	/*
-	String ans = "[ ";
-	for (int i = 0; i < heap.length; i++){
-	    ans += heap[i] + " ";
-	}
-	ans += "]";
-	return ans;
-	*/
     }
 
     public int remove(){
@@ -41,6 +34,12 @@ public class MyHeap{
 	return -1;
     }
 
+    public void swap(int i, int j){
+	int temp = heap[i];
+	heap[i] = heap[j];
+	heap[j] = temp;
+    }
+
     public void add(int x){
 	//resize if needed
 
@@ -48,14 +47,21 @@ public class MyHeap{
 	//next open spot in array = x
 	heap[heap[0] + 1] = x;
 	heap[0]++;
+	int size = heap[0];
 
-	/*
-	if (size == 0){ //add at root
-	    heap[1] = x;
-	    size++;
-	}else{
+	//compare and swap
+	while (heap[0]/2 > 0){
+
+	    //if child > parent
+	    if (heap[heap[0]] > heap[heap[0]/2]){
+		swap(heap[0], heap[0]/2);
+	    }
+	    //System.out.println(heap[0]);
+	    
+	    heap[0] = heap[0]/2;
 	}
-	*/
+	heap[0] = size;
+
     }
 
     public int peek(){
@@ -67,11 +73,18 @@ public class MyHeap{
 	MyHeap h = new MyHeap();
 	print(h);
 
+	h.add(70);
+	print(h);
 	h.add(88);
+	h.add(98);
+	h.add(5);
+	print(h);
+	h.add(900);
+	h.add(4);
+	h.add(0);
+	h.add(-2);
 	print(h);
 
-	h.add(2);
-	print(h);
     }
 
     public static void print(Object o){

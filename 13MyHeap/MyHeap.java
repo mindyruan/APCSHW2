@@ -37,23 +37,33 @@ public class MyHeap{
 	    
 	    //replace root with last added
 	    heap[1] = heap[heap[0]];
-	    heap[heap[0]] = 0;
+	    //heap[heap[0]] = 0;
 	    //heap[0]--;
 	    System.out.println(heap[0]);
 
 	    //swap down
-	    //if child > new root
 	    int curr = 1;
-	    System.out.println(hasChildren(curr));
+	    //System.out.println(hasChildren(curr));
+	    
+	    System.out.println(this + "go!!");
 
-	    /*
 	    if (heap[0] > 1){
 		//while there are children
 		while (hasChildren(curr)){
-		    swap(getLeft(1),heap[1]);
+		    //if child > new root
+		    if (heap[getLeft(curr)] > heap[curr]){
+			swap(getLeft(curr),curr);
+			curr = getLeft(curr);
+		    }else if (heap[getRight(curr)] > heap[curr]){
+			swap(getRight(curr),curr);
+			curr = getRight(curr);
+		    }else{
+			break;
+		    }
+		    System.out.println(this);
 		}
 	    }
-	    */
+	    
 	    heap[0]--;
 	    return temp;
 	}
@@ -100,20 +110,18 @@ public class MyHeap{
 
     public static void main(String[]arg){
 	MyHeap h = new MyHeap();
-	print(h);
 
 	h.add(70);
-	print(h);
 	h.add(88);
 	h.add(98);
 	h.add(5);
-	print(h);
 	h.add(900);
 	h.add(4);
 	h.add(0);
 	h.add(-2);
 	print(h);
 
+	print("remove root!! (please)");
 	h.remove();
 	print(h);
 
